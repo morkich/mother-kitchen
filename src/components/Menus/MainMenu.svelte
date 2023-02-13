@@ -4,9 +4,17 @@
 	const menuToggleHandle = () => {
 		isMenuOpen = !isMenuOpen;
 	};
+
+	const clickOutsideHandler = (event) => {
+		const difference = event.target.classList.contains('menuBurgerButton');
+		if (!difference) {
+			isMenuOpen = false;
+		}
+	};
 </script>
 
-<button class="menuBurgerButton" on:click={menuToggleHandle} class:isMenuOpen>
+<svelte:window on:click={clickOutsideHandler} />
+<button class:isMenuOpen class="menuBurgerButton" on:click={menuToggleHandle}>
 	<span class="lineOne" />
 	<span class="lineTwo" />
 	<span class="lineThree" />
@@ -49,6 +57,12 @@
 
 	.menuBurgerButton:hover span {
 		background-color: #000;
+	}
+
+	.lineOne,
+	.lineTwo,
+	.lineThree {
+		pointer-events: none;
 	}
 
 	.menuBurgerButton.isMenuOpen .lineTwo {
