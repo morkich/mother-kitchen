@@ -56,7 +56,7 @@
 	}
 
 	.menuBurgerButton:hover span {
-		background-color: #000;
+		background-color: var(--color-dark-blue);
 	}
 
 	.lineOne,
@@ -80,7 +80,7 @@
 	.menuBurgerButton span {
 		width: 100%;
 		height: 4px;
-		background-color: #666;
+		background-color: var(--color-dark-grey);
 		border-radius: 5px;
 		transition: 0.2s;
 	}
@@ -110,7 +110,7 @@
 	.menuList {
 		display: grid;
 		grid-template-columns: 1fr;
-		grid-gap: 10px;
+		grid-gap: 15px;
 		list-style-type: none;
 		font-size: 25px;
 		padding: 0;
@@ -118,12 +118,14 @@
 
 	.menuLink {
 		text-decoration: none;
-		color: teal;
+		color: var(--color-dark-blue);
 		font-weight: 600;
 		transition: 0.2s;
+		padding: 5px 10px;
+		border-radius: 10px;
 	}
 
 	.menuLink:hover {
-		filter: brightness(0.5);
+		background-color: #fadbd8;
 	}
 </style>

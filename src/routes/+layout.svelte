@@ -20,9 +20,9 @@
 
 	:root {
 		--color-light-blue: #aed6f1;
-		--color-light-pink: #fadbd8;
-		--color-light-blue: #85c1e9;
+		--color-blue: #85c1e9;
 		--color-dark-blue: #2e4053;
+		--color-light-pink: #fadbd8;
 		--color-dark-grey: #5d6d7e;
 		--color-bcg-grey: #e8e8e8;
 		--font-main: 'Roboto', sans-serif;
