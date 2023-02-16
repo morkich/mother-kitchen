@@ -5,14 +5,12 @@
 	import MainMenu from './Menus/MainMenu.svelte';
 
 	export let data = false;
-
-	console.log(data);
 </script>
 
 <header class="mainHeader">
 	<Logo title={data.logoData.logoTitle} />
 	<MainSearch placeholder={'Найти рецепт...'} />
-	<UserLogin userData={data.userData} />
+	<UserLogin />
 	<MainMenu menuOptions={data.mainMenuOptions} />
 </header>
 

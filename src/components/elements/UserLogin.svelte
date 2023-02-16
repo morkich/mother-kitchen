@@ -1,15 +1,12 @@
 <script>
-	export let userData = {
-		userAvatar: '/images/users/coverAvatar.svg',
-		userName: 'Войти'
-	};
+	import { userStore } from '../../stores/userStore';
 </script>
 
 <div class="wrap userLogin">
 	<div class="avatar">
-		<img src={userData.userAvatar} alt={userData.userName} />
+		<img src={$userStore.userAvatar} alt={$userStore.userName} />
 	</div>
-	<button class="login">{userData.userName}</button>
+	<button class="login">{$userStore.userName}</button>
 </div>
 
 <style>

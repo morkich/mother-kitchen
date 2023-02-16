@@ -1,8 +1,11 @@
 <script>
-	export let data;
-
+	import { userStore } from '../stores/userStore';
 	import Footer from '../components/Footer.svelte';
 	import Header from '../components/Header.svelte';
+
+	export let data;
+
+	userStore.set(data.headerData.userData);
 </script>
 
 <Header data={data.headerData} />
