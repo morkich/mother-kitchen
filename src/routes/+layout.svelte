@@ -1,14 +1,17 @@
 <script>
+	export let data;
+
+	import Footer from '../components/Footer.svelte';
 	import Header from '../components/Header.svelte';
 </script>
 
-<Header />
+<Header data={data.headerData} />
 
 <main class="contentContainer">
 	<slot />
 </main>
 
-<footer class="mainFooter">Футер тут</footer>
+<Footer />
 
 <style>
 	@font-face {
@@ -18,6 +21,41 @@
 		src: local(''), url('/fonts/AubreyPro.woff2') format('woff2');
 	}
 
+	@font-face {
+		font-family: 'Comforter';
+		font-style: normal;
+		font-weight: 500;
+		src: local(''), url('/fonts/ComforterBrush.woff2') format('woff2');
+	}
+
+	@font-face {
+		font-family: 'rootUi';
+		font-style: normal;
+		font-weight: 700;
+		src: local(''), url('/fonts/pt-root-ui_bold.woff2') format('woff2');
+	}
+
+	@font-face {
+		font-family: 'rootUi';
+		font-style: normal;
+		font-weight: 200;
+		src: local(''), url('/fonts/pt-root-ui_light.woff2') format('woff2');
+	}
+
+	@font-face {
+		font-family: 'rootUi';
+		font-style: normal;
+		font-weight: 500;
+		src: local(''), url('/fonts/pt-root-ui_medium.woff2') format('woff2');
+	}
+
+	@font-face {
+		font-family: 'rootUi';
+		font-style: normal;
+		font-weight: 400;
+		src: local(''), url('/fonts/pt-root-ui_regular.woff2') format('woff2');
+	}
+
 	:root {
 		--color-light-blue: #aed6f1;
 		--color-blue: #85c1e9;
@@ -25,13 +63,15 @@
 		--color-light-pink: #fadbd8;
 		--color-dark-grey: #5d6d7e;
 		--color-bcg-grey: #e8e8e8;
-		--font-main: 'Roboto', sans-serif;
+		--font-main: 'rootUi', sans-serif;
 		--font-second: 'AubreyPro', sans-serif;
+		--font-logo: 'Comforter', sans-serif;
 	}
 
 	:global(html) {
 		background-color: #333;
 		font-family: var(--font-main);
+		font-weight: 500;
 		padding: 0;
 		margin: 0;
 	}

@@ -1,4 +1,6 @@
 <script>
+	export let menuOptions = [];
+
 	let isMenuOpen = false;
 
 	const menuToggleHandle = () => {
@@ -22,18 +24,11 @@
 
 <nav class="mainMenu wrap" class:isMenuOpen>
 	<ul class="menuList">
-		<li class="menuItem">
-			<a href="/" class="menuLink" on:click={menuToggleHandle}>Главная</a>
-		</li>
-		<li class="menuItem">
-			<a href="/recipes" class="menuLink" on:click={menuToggleHandle}>Рецепты</a>
-		</li>
-		<li class="menuItem">
-			<a href="/authors" class="menuLink" on:click={menuToggleHandle}>Авторы</a>
-		</li>
-		<li class="menuItem">
-			<a href="/contacts" class="menuLink" on:click={menuToggleHandle}>Контакты</a>
-		</li>
+		{#each menuOptions as options, index}
+			<li class="menuItem">
+				<a href={options.url} class="menuLink" on:click={menuToggleHandle}>{options.title}</a>
+			</li>
+		{/each}
 	</ul>
 </nav>
 
@@ -45,7 +40,8 @@
 		display: flex;
 		flex-direction: column;
 		box-sizing: border-box;
-		justify-content: space-between;
+		justify-content: center;
+		gap: 4px;
 		width: 30px;
 		height: 25px;
 		padding: 0;
@@ -70,11 +66,11 @@
 	}
 
 	.menuBurgerButton.isMenuOpen .lineOne {
-		transform: translateY(10px) rotate(-45deg);
+		transform: translateY(4px) rotate(-45deg);
 	}
 
 	.menuBurgerButton.isMenuOpen .lineThree {
-		transform: translateY(-10px) rotate(45deg);
+		transform: translateY(-4px) rotate(45deg);
 	}
 
 	.menuBurgerButton span {
@@ -126,6 +122,6 @@
 	}
 
 	.menuLink:hover {
-		background-color: #fadbd8;
+		background-color: var(--color-light-pink);
 	}
 </style>
