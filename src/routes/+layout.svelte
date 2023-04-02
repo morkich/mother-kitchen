@@ -14,7 +14,7 @@
 	<slot />
 </main>
 
-<Footer />
+<Footer logoTitle={data.headerData.logoData.logoTitle} />
 
 <style>
 	@font-face {
@@ -80,7 +80,7 @@
 	}
 
 	:global(body) {
-		overflow: hidden;
+		overflow-x: hidden;
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-gap: 30px;
@@ -93,8 +93,16 @@
 		min-height: 100vh;
 	}
 
+	:global(#wt-sky-root) {
+		display: none;
+	}
+
 	.contentContainer {
-		max-width: 1400px;
+		max-width: 1300px;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0 30px;
+		min-height: 100vh;
 		margin: auto;
 	}
 </style>
