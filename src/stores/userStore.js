@@ -1,2 +1,2 @@
-import { writable } from "svelte/store";
-export const userStore = writable(false);
+import { writable } from 'svelte/store';
+export const userStore = writable({});

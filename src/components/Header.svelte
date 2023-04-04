@@ -1,7 +1,7 @@
 <script>
 	import Logo from './elements/Logo.svelte';
 	import MainSearch from './elements/MainSearch.svelte';
-	import UserLogin from './elements/UserLogin.svelte';
+	import UserLogin from './elements/User/UserLogin.svelte';
 	import MainMenu from './Menus/MainMenu.svelte';
 
 	export let data = false;
@@ -10,12 +10,13 @@
 <header class="mainHeader">
 	<Logo title={data.logoData.logoTitle} />
 	<MainSearch placeholder={'Найти рецепт...'} />
-	<UserLogin />
+	<UserLogin data={data.userData} />
 	<MainMenu menuOptions={data.mainMenuOptions} />
 </header>
 
 <style>
 	.mainHeader {
+		position: relative;
 		display: flex;
 		align-items: center;
 		gap: 40px;
