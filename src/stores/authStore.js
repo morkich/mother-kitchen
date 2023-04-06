@@ -6,6 +6,7 @@ export const authStore = writable({
 	password: '',
 	token: ''
 });
+export const isLoadAuthStore = writable(true);
 
 export const saveLoginDataThunk = (value, name, authData) => {
 	authData[name] = value;
@@ -15,7 +16,20 @@ export const saveLoginDataThunk = (value, name, authData) => {
 export const setLoginDataThunk = async (authData) => {
 	const response = await authApi.userLogin(authData.login, authData.password);
 	if (response) {
-		authStore.set({ ...authData, token: response.token, isAuth: true });
+		authStore.set({ ...authData, isAuth: true });
 		userStore.set(response.user);
+		document.cookie = `token=${response.token}; path=/`;
 	}
+};
+
+export const authUserThunk = async () => {
+	const token = document.cookie.match('(^|;)\\s*token\\s*=\\s*([^;]+)')?.pop() || '';
+	const response = await authApi.userAuth(token);
+
+	if (response) {
+		userStore.set(response.user);
+		authStore.set({ isAuth: true });
+		document.cookie = `token=${response.token}; path=/`;
+	}
+	isLoadAuthStore.set(false);
 };

@@ -5,8 +5,6 @@
 	import { userStore } from '../../../stores/userStore';
 
 	$: authData = $authStore;
-	$: console.log($authStore);
-	$: console.log($userStore);
 
 	const inputDataHandle = (event) => {
 		saveLoginDataThunk(event.target.value, event.target.name, authData);

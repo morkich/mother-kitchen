@@ -23,7 +23,7 @@
 		box-sizing: border-box;
 		box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
 		border-radius: 10px;
-		min-height: 40px;
+		height: 65px;
 		padding: 10px 30px;
 	}
 </style>

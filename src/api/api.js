@@ -30,5 +30,8 @@ export const categoryAPI = {
 export const authApi = {
 	userLogin(login, password) {
 		return postDataByServer('auth/login', { username: login, password });
+	},
+	userAuth(token) {
+		return postDataByServer('auth/check', { token });
 	}
 };
