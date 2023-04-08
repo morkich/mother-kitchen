@@ -2,7 +2,8 @@
 	import Button from '../../ui/Buttons/Button.svelte';
 	import Input from '../../ui/inputs/Input.svelte';
 	import { authStore, saveLoginDataThunk, setLoginDataThunk } from '../../../stores/authStore';
-	import { userStore } from '../../../stores/userStore';
+
+	export let isOpenLoginForm;
 
 	$: authData = $authStore;
 
@@ -12,6 +13,7 @@
 
 	const submitFormHandle = () => {
 		setLoginDataThunk(authData);
+		isOpenLoginForm = false;
 	};
 </script>
 

@@ -1,20 +1,27 @@
 <script>
-	import { slide } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import { userStore } from '../../../stores/userStore';
 	import LoginForm from './LoginForm.svelte';
 	import { authStore, authUserThunk, isLoadAuthStore } from '../../../stores/authStore';
 	import { onMount } from 'svelte';
 	import PreloaderInfinity from '../../ui/Preloaders/PreloaderInfinity.svelte';
+	import { portalAction } from '../../../actions/portal';
+	import Modal from '../../System/Modal.svelte';
+	import UserMenu from './UserMenu.svelte';
 
 	export let data = {};
 
-	let isOpenLoginForm = false;
+	let isOpenLoginForm = false,
+		isUserMenuOpen = false,
+		userAvatar = false;
+
 	$: authData = $authStore;
 	$: userData = $userStore;
 	$: isLoading = $isLoadAuthStore;
 
-	$: console.log(isLoading);
-
+	$: if (userData) {
+		userAvatar = getUserAvatar();
+	}
 	const getUserAvatar = () => {
 		return userData.avatar || data.userAvatar;
 	};
@@ -23,10 +30,22 @@
 		isOpenLoginForm = !isOpenLoginForm;
 	};
 
+	const openUserMenuHandle = () => {
+		isUserMenuOpen = !isUserMenuOpen;
+	};
+
 	onMount(() => {
 		authUserThunk();
 	});
 </script>
+
+{#if isOpenLoginForm}
+	<div use:portalAction={'modal'}>
+		<Modal bind:isShow={isOpenLoginForm}>
+			<LoginForm bind:isOpenLoginForm />
+		</Modal>
+	</div>
+{/if}
 
 <div class="wrap userLogin">
 	{#if isLoading}
@@ -34,24 +53,29 @@
 			<PreloaderInfinity />
 		</div>
 	{:else if authData.isAuth}
-		<div class="avatar 2">
-			<img src={getUserAvatar()} alt={$userStore.username} />
+		<div class="avatar">
+			<img src={userAvatar} alt={$userStore.username} />
 		</div>
-		<button class="login" on:click={openLoginFormHandle}>{userData.username}</button>
+		<button class="login" on:click={openUserMenuHandle}>{userData.username}</button>
 	{:else}
 		<div class="avatar">
 			<img src={userData.userAvatar} alt={userData.userName} />
 		</div>
 		<button class="login" on:click={openLoginFormHandle}>Войти</button>
 	{/if}
+	{#if isUserMenuOpen}
+		<div class="userMenuWrapper" transition:fade={{ duration: 200 }}>
+			<UserMenu bind:isUserMenuOpen />
+		</div>
+	{/if}
 </div>
-{#if isOpenLoginForm && !authData.isAuth}
-	<div class="loginFormWrap" transition:slide={{ duration: 200 }}>
-		<LoginForm />
-	</div>
-{/if}
 
 <style>
+	.userMenuWrapper {
+		position: absolute;
+		top: 100%;
+	}
+
 	.userLogin {
 		z-index: 10;
 		display: flex;
@@ -71,11 +95,6 @@
 
 	.login:hover {
 		color: var(--color-dark-grey);
-	}
-	.loginFormWrap {
-		position: absolute;
-		top: 100%;
-		right: 0;
 	}
 	.preloaderWrap {
 		max-height: 40px;

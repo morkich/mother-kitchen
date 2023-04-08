@@ -33,3 +33,16 @@ export const authUserThunk = async () => {
 	}
 	isLoadAuthStore.set(false);
 };
+
+export const exitUserThunk = () => {
+	let cookies = document.cookie.split(';');
+	for (var i = 0; i < cookies.length; i++) {
+		const cookie = cookies[i];
+		const eqPos = cookie.indexOf('=');
+		const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+		document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+		document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+		authStore.set({ isAuth: false });
+		userStore.set({ avatar: false });
+	}
+};

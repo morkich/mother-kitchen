@@ -2,7 +2,7 @@
 	import { userStore } from '../stores/userStore';
 	import Footer from '../components/Footer.svelte';
 	import Header from '../components/Header.svelte';
-
+	import { createPortalAction } from '../actions/portal';
 	export let data;
 
 	userStore.set(data.headerData.userData);
@@ -14,6 +14,7 @@
 	<slot />
 </main>
 
+<div use:createPortalAction={'modal'} class="portalModal" />
 <Footer logoTitle={data.headerData.logoData.logoTitle} />
 
 <style>
