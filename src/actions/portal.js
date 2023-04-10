@@ -2,7 +2,6 @@ import { tick } from 'svelte';
 
 const portal_map = new Map();
 const createPortal = (type) => (node, id) => {
-	console.log(node, id, type);
 	const key = `$$portal.${id}`;
 	if (portal_map.has(key)) {
 		throw `duplicate portal key "${id}"`;
@@ -32,5 +31,4 @@ const portal = (type) => (node, id) => {
 };
 
 export const createPortalAction = createPortal('create');
-
 export const portalAction = portal('create');

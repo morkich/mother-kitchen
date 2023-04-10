@@ -19,10 +19,40 @@ const postDataByServer = async (endPoint, data) => {
 	return responseData;
 };
 
+export const recipeAPI = {
+	getRecipe(recipeId) {
+		const endPoint = `recipes/${recipeId}`;
+		return getDataByServer(endPoint);
+	}
+};
+
+export const toolAPI = {
+	getTools(toolsIds) {
+		const getQuery = toolsIds && toolsIds.length ? `?ids=${toolsIds.join(',')}` : '';
+		const endPoint = `tools${getQuery}`;
+		return getDataByServer(endPoint);
+	}
+};
+
+export const ingredientAPI = {
+	getIngredients(ingredientIds) {
+		const getQuery = ingredientIds && ingredientIds.length ? `?ids=${ingredientIds.join(',')}` : '';
+		const endPoint = `ingredients${getQuery}`;
+		return getDataByServer(endPoint);
+	}
+};
+
 export const categoryAPI = {
 	getCategories(fieldsArray = []) {
-		const getQuery = fieldsArray.length ? `?fields=${fieldsArray.join(',')}` : '';
+		const getQuery = fieldsArray && fieldsArray.length ? `?fields=${fieldsArray.join(',')}` : '';
 		const endPoint = `categories${getQuery}`;
+		return getDataByServer(endPoint);
+	}
+};
+
+export const userAPI = {
+	getUser(userId) {
+		const endPoint = `users/${userId}`;
 		return getDataByServer(endPoint);
 	}
 };
