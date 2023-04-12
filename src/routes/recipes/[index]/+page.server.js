@@ -1,8 +1,9 @@
-import { ingredientAPI, recipeAPI, toolAPI, userAPI } from '../../../api/api.js';
+import { categoryAPI, ingredientAPI, recipeAPI, toolAPI, userAPI } from '../../../api/api.js';
 
 export const load = async (data) => {
 	const recipeData = await recipeAPI.getRecipe(data.params.index);
 	const authorData = await userAPI.getUser(recipeData.author);
+	const categoriesData = await categoryAPI.getCategories(recipeData.categories);
 
 	const toolsIds = getDataIdsBySteps(recipeData.steps, 'tools');
 	const ingredientsIds = getDataIdsBySteps(recipeData.steps, 'ingredients');
@@ -19,7 +20,7 @@ export const load = async (data) => {
 	};
 
 	//достали все данные, можно рисовать страницу.
-	return { pageData, recipeData, authorData, toolsData, ingredientsData };
+	return { pageData, recipeData, authorData, toolsData, ingredientsData, categoriesData };
 };
 
 const getDataIdsBySteps = (steps, dataName) => {

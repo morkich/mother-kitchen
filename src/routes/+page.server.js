@@ -1,7 +1,7 @@
 import { categoryAPI } from '../api/api';
 
 export const load = async (params) => {
-	const categoriesData = await categoryAPI.getCategories(['title', 'alias', 'icon']);
+	const categoriesData = await categoryAPI.getAllCategories(['title', 'alias', 'icon']);
 	const pageData = {
 		meta: {
 			title: 'Главная страница',

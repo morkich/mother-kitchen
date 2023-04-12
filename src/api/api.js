@@ -43,8 +43,13 @@ export const ingredientAPI = {
 };
 
 export const categoryAPI = {
-	getCategories(fieldsArray = []) {
+	getAllCategories(fieldsArray = []) {
 		const getQuery = fieldsArray && fieldsArray.length ? `?fields=${fieldsArray.join(',')}` : '';
+		const endPoint = `categories${getQuery}`;
+		return getDataByServer(endPoint);
+	},
+	getCategories(categoriesIds) {
+		const getQuery = categoriesIds && categoriesIds.length ? `?ids=${categoriesIds.join(',')}` : '';
 		const endPoint = `categories${getQuery}`;
 		return getDataByServer(endPoint);
 	}

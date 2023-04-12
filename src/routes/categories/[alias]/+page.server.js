@@ -1,7 +1,7 @@
 import { categoryAPI } from '../../../api/api';
 
 export const load = async (data) => {
-	const categoriesData = await categoryAPI.getCategories();
+	const categoriesData = await categoryAPI.getAllCategories();
 	const categoryData = getCategoryData(categoriesData, data.params.alias);
 
 	const pageData = {
