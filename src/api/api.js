@@ -23,6 +23,10 @@ export const recipeAPI = {
 	getRecipe(recipeId) {
 		const endPoint = `recipes/${recipeId}`;
 		return getDataByServer(endPoint);
+	},
+	addView(recipeId) {
+		const endPoint = `recipes/view/${recipeId}`;
+		return getDataByServer(endPoint);
 	}
 };
 
