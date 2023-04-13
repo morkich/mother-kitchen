@@ -1,7 +1,10 @@
 <script>
 	import Meta from '../../../components/Meta.svelte';
+	import SettingsPanel from '../../../components/RecipeElements/SettingsPanel/SettingsPanel.svelte';
 	import Breadcrumbs from '../../../components/elements/Breadcrumbs.svelte';
 	import TitleRecipe from '../../../components/elements/Titles/TitleRecipe.svelte';
+	import { initRecipeStoresThunk } from '../../../stores/recipeStore';
+
 	export let data;
 
 	$: recipeData = data.recipeData;
@@ -9,8 +12,11 @@
 	$: ingredientsData = data.ingredientsData;
 	$: toolsData = data.toolsData;
 	$: categoriesData = data.categoriesData;
-
 	$: breadcrumbsArray = getBreadcrumbsArray(categoriesData, recipeData);
+
+	$: if (recipeData) {
+		initRecipeStoresThunk(recipeData);
+	}
 
 	const getBreadcrumbsArray = (categoriesData, recipeData) => {
 		return [
@@ -22,6 +28,8 @@
 			{ title: recipeData.recipeName.toLowerCase() }
 		];
 	};
+
+	$: console.log(recipeData);
 </script>
 
 <Meta title={data.pageData.meta.title} description={data.pageData.meta.description} />
@@ -34,7 +42,7 @@
 				<Breadcrumbs pathArray={breadcrumbsArray} />
 			</div>
 
-			<div class="optionsWrap">опции</div>
+			<SettingsPanel recipeId={recipeData._id} />
 		</header>
 
 		<div class="recipeBody">Шаги и всякое</div>
@@ -49,6 +57,12 @@
 	.mainWrap {
 		display: grid;
 		grid-template-columns: 1fr 280px;
+		grid-gap: 50px;
+	}
+
+	.recipeHeader {
+		display: flex;
+		justify-content: space-between;
 	}
 
 	.titleWrap {

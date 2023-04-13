@@ -67,6 +67,8 @@
 		--color-light-pink: #fadbd8;
 		--color-dark-grey: #5d6d7e;
 		--color-bcg-grey: #e8e8e8;
+		--color-yellow: #ffd700;
+		--color-tomato: #ff6347;
 		--font-main: 'rootUi', sans-serif;
 		--font-second: 'AubreyPro', sans-serif;
 		--font-logo: 'Comforter', sans-serif;
