@@ -6,9 +6,10 @@
 	export let isLike = false;
 	export let recipeId = 0;
 	export let likes = 0;
+	export let userId = 0;
 
-	const clickLikeHandle = (event) => {
-		likedRecipeThunk(isLike, recipeId);
+	const clickLikeHandle = () => {
+		likedRecipeThunk(isLike, recipeId, userId);
 	};
 </script>
 

@@ -11,7 +11,11 @@
 	let views = $recipeViewsStore,
 		likes = $recipeLikesStore,
 		isLike = false,
-		isFavorite = false;
+		isFavorite = false,
+		userId = 0;
+
+	$: userId = $userStore._id;
+	$: likes = $recipeLikesStore;
 
 	$: if ($userStore.likedRecipes) isLike = isRecipeId($userStore.likedRecipes);
 	$: if ($userStore.favoriteRecipes) isFavorite = isRecipeId($userStore.favoriteRecipes);
@@ -24,8 +28,8 @@
 
 <div class="wrap">
 	<PrintButton />
-	<FavoriteButton {recipeId} {isFavorite} />
-	<LikeButton {recipeId} {likes} {isLike} />
+	<FavoriteButton {recipeId} {userId} {isFavorite} />
+	<LikeButton {recipeId} {userId} {likes} {isLike} />
 	<Views {recipeId} {views} />
 </div>
 

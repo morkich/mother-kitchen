@@ -5,9 +5,10 @@
 
 	export let isFavorite = false;
 	export let recipeId = 0;
+	export let userId = 0;
 
 	const clickFavoriteHandle = () => {
-		makeFavoritesRecipeThunk(isFavorite, recipeId);
+		makeFavoritesRecipeThunk(isFavorite, recipeId, userId);
 	};
 </script>
 

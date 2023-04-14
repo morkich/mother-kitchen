@@ -6,10 +6,11 @@ const getDataByServer = async (endPoint) => {
 };
 
 const postDataByServer = async (endPoint, data) => {
+	const token = document.cookie.match('(^|;)\\s*token\\s*=\\s*([^;]+)')?.pop() || '';
 	const url = `http://localhost:3000/${endPoint}`;
 	const response = await fetch(url, {
 		method: 'POST',
-		body: JSON.stringify(data),
+		body: JSON.stringify({ ...data, token }),
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json'
@@ -27,6 +28,12 @@ export const recipeAPI = {
 	addView(recipeId) {
 		const endPoint = `recipes/view/${recipeId}`;
 		return getDataByServer(endPoint);
+	},
+	changeLike(isLike, recipeId, userId) {
+		return postDataByServer('recipes/liked', { isLike, recipeId, userId });
+	},
+	addFavorite(isFavorite, recipeId, userId) {
+		return postDataByServer('recipes/favorite', { isFavorite, recipeId, userId });
 	}
 };
 
