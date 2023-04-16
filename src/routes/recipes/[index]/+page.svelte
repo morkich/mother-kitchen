@@ -1,5 +1,6 @@
 <script>
 	import Meta from '../../../components/Meta.svelte';
+	import RecipeHeader from '../../../components/RecipeElements/SettingsPanel/RecipeHeader/RecipeHeader.svelte';
 	import SettingsPanel from '../../../components/RecipeElements/SettingsPanel/SettingsPanel.svelte';
 	import Breadcrumbs from '../../../components/elements/Breadcrumbs.svelte';
 	import TitleRecipe from '../../../components/elements/Titles/TitleRecipe.svelte';
@@ -28,22 +29,33 @@
 			{ title: recipeData.recipeName.toLowerCase() }
 		];
 	};
-
-	$: console.log(recipeData);
 </script>
 
 <Meta title={data.pageData.meta.title} description={data.pageData.meta.description} />
 
 <div class="mainWrap">
 	<div class="recipeContent">
-		<header class="recipeHeader">
-			<div class="titleWrap">
-				<TitleRecipe title={recipeData.recipeName} />
-				<Breadcrumbs pathArray={breadcrumbsArray} />
+		<RecipeHeader title={recipeData.recipeName} recipeId={recipeData._id} {breadcrumbsArray} />
+
+		<div class="recipePreview">
+			<div class="recipeImageWrap">
+				<img src={recipeData.image} alt="" class="recipeImageImage" />
 			</div>
 
-			<SettingsPanel recipeId={recipeData._id} />
-		</header>
+			<div class="recipeInfo">
+				<div class="recipeIngredients">
+					<div class="infoTitleWrap">
+						<h3 class="infoTitle">Состав</h3>
+						<div class="portionCount">Количество порций: 4 -+</div>
+					</div>
+					<ul class="inredientList">
+						{#each ingredientsData as ingredientItem, index}
+							<li>{ingredientItem.title}....{ingredientItem.mass}</li>
+						{/each}
+					</ul>
+				</div>
+			</div>
+		</div>
 
 		<div class="recipeBody">Шаги и всякое</div>
 
@@ -59,15 +71,9 @@
 		grid-template-columns: 1fr 280px;
 		grid-gap: 50px;
 	}
-
-	.recipeHeader {
-		display: flex;
-		justify-content: space-between;
-	}
-
-	.titleWrap {
+	.recipeContent {
 		display: grid;
 		grid-template-columns: 1fr;
-		grid-gap: 5px;
+		grid-gap: 25px;
 	}
 </style>

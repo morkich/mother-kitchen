@@ -5,10 +5,14 @@ export const load = async (data) => {
 	const authorData = await userAPI.getUser(recipeData.author);
 	const categoriesData = await categoryAPI.getCategories(recipeData.categories);
 
-	const toolsIds = getDataIdsBySteps(recipeData.steps, 'tools');
-	const ingredientsIds = getDataIdsBySteps(recipeData.steps, 'ingredients');
+	const toolsIds = getToolsIdsBySteps(recipeData.steps, 'stepTools');
 	const toolsData = await toolAPI.getTools(toolsIds);
+
+	const ingredientsIds = getIngredientsIdsBySteps(recipeData.steps);
 	const ingredientsData = await ingredientAPI.getIngredients(ingredientsIds);
+
+	appendAndSortByMass(recipeData.steps, ingredientsData);
+	appendDataForRecipe(recipeData, ingredientsData);
 
 	const pageData = {
 		meta: {
@@ -19,11 +23,56 @@ export const load = async (data) => {
 		userData: 3
 	};
 
-	//достали все данные, можно рисовать страницу.
-	return { pageData, recipeData, authorData, toolsData, ingredientsData, categoriesData };
+	return {
+		pageData,
+		recipeData,
+		authorData,
+		toolsData,
+		ingredientsData,
+		categoriesData
+	};
 };
 
-const getDataIdsBySteps = (steps, dataName) => {
+const appendDataForRecipe = (recipeData, ingredientsData) => {
+	appendCookingTime(recipeData);
+	appendKcal(recipeData, ingredientsData);
+};
+
+const appendKcal = (recipeData, ingredientsData) => {
+	const kcalSum = ingredientsData
+		.map((item) => (item.kcal / 100) * item.mass)
+		.reduce((accumulator, currentValue) => accumulator + currentValue);
+	recipeData.kcal = Math.floor(kcalSum);
+};
+
+const appendCookingTime = (recipeData) => {
+	recipeData.cookingTime = recipeData.steps
+		.map((stepItem) => stepItem.stepCookingTime)
+		.reduce((accumulator, currentValue) => accumulator + currentValue);
+};
+
+const appendAndSortByMass = (steps, ingredientsData) => {
+	let ingredientsDataArray = getIngredientDataForSteps(steps);
+	const uniqueIngredients = ingredientsDataArray.reduce((accumulator, current) => {
+		if (!accumulator[current.ingredientId]) {
+			accumulator[current.ingredientId] = current.mass;
+		} else {
+			accumulator[current.ingredientId] += current.mass;
+		}
+		return accumulator;
+	}, {});
+	ingredientsData.forEach((ingredientItem) => {
+		ingredientItem.mass = uniqueIngredients[ingredientItem._id];
+	});
+	ingredientsData.sort((a, b) => b.mass - a.mass);
+};
+
+const getIngredientsIdsBySteps = (steps) => {
+	let ingredientsDataArray = getIngredientDataForSteps(steps);
+	return ingredientsDataArray.map((item) => item.ingredientId);
+};
+
+const getToolsIdsBySteps = (steps, dataName) => {
 	let items = [];
 	steps
 		.map((step) => step[dataName])
@@ -31,4 +80,12 @@ const getDataIdsBySteps = (steps, dataName) => {
 			items = [...items, ...item];
 		});
 	return [...new Set(items)];
+};
+
+const getIngredientDataForSteps = (steps) => {
+	let ingredientsDataArray = [];
+	steps.forEach((step) => {
+		ingredientsDataArray = [...ingredientsDataArray, ...step.stepIngredients];
+	});
+	return ingredientsDataArray;
 };

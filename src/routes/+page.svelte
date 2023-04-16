@@ -10,4 +10,4 @@
 Главная страница
 <Categories items={data.pageData.categoriesData} />
 
-<a href="http://localhost:5173/recipes/64346148eda2b19b65a61e78/">тестовый рецепт</a>
+<a href="http://localhost:5173/recipes/643bb2d74d57b129251804d0/">тестовый рецепт</a>

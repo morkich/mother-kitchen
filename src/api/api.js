@@ -10,10 +10,11 @@ const postDataByServer = async (endPoint, data) => {
 	const url = `http://localhost:3000/${endPoint}`;
 	const response = await fetch(url, {
 		method: 'POST',
-		body: JSON.stringify({ ...data, token }),
+		body: JSON.stringify({ ...data }),
 		headers: {
 			Accept: 'application/json',
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`
 		}
 	});
 	const responseData = response.ok ? await response.json() : false;
@@ -25,12 +26,12 @@ export const recipeAPI = {
 		const endPoint = `recipes/${recipeId}`;
 		return getDataByServer(endPoint);
 	},
+	changeLike(isLike, recipeId, userId) {
+		return postDataByServer('recipes/liked', { isLike, recipeId, userId });
+	},
 	addView(recipeId) {
 		const endPoint = `recipes/view/${recipeId}`;
 		return getDataByServer(endPoint);
-	},
-	changeLike(isLike, recipeId, userId) {
-		return postDataByServer('recipes/liked', { isLike, recipeId, userId });
 	},
 	addFavorite(isFavorite, recipeId, userId) {
 		return postDataByServer('recipes/favorite', { isFavorite, recipeId, userId });
