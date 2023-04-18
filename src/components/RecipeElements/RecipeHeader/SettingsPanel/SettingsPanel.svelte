@@ -1,10 +1,10 @@
 <script>
-	import { recipeLikesStore, recipeViewsStore } from '../../../stores/recipeStore';
-	import { userStore } from '../../../stores/userStore';
+	import { userStore } from '../../../../stores/userStore';
+	import Views from './Views.svelte';
 	import FavoriteButton from './FavoriteButton.svelte';
 	import LikeButton from './LikeButton.svelte';
 	import PrintButton from './PrintButton.svelte';
-	import Views from './Views.svelte';
+	import { recipeLikesStore, recipeViewsStore } from '../../../../stores/recipeStore';
 
 	export let recipeId = false;
 

@@ -18,18 +18,22 @@ export const setLoginDataThunk = async (authData) => {
 	if (response) {
 		authStore.set({ ...authData, isAuth: true });
 		userStore.set(response.user);
-		document.cookie = `token=${response.token}; path=/`;
+		setCookie(response.token);
 	}
 };
 
 export const authUserThunk = async () => {
 	const token = document.cookie.match('(^|;)\\s*token\\s*=\\s*([^;]+)')?.pop() || '';
-	const response = await authApi.userAuth(token);
+	if (!token) {
+		isLoadAuthStore.set(false);
+		return false;
+	}
 
+	const response = await authApi.userAuth(token);
 	if (response) {
 		userStore.set(response.user);
 		authStore.set({ isAuth: true });
-		document.cookie = `token=${response.token}; path=/`;
+		setCookie(response.token);
 	}
 	isLoadAuthStore.set(false);
 };
@@ -45,4 +49,12 @@ export const exitUserThunk = () => {
 		authStore.set({ isAuth: false });
 		userStore.set({ avatar: false });
 	}
+};
+
+const setCookie = (token) => {
+	let now = new Date();
+	let time = now.getTime();
+	let expireTime = time + 24 * 60 * 60 * 1000;
+	now.setTime(expireTime);
+	document.cookie = `token=${token};expires=${now.toUTCString()}; path=/`;
 };

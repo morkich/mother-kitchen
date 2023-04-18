@@ -1,7 +1,7 @@
 <script>
-	import Breadcrumbs from '../../../elements/Breadcrumbs.svelte';
-	import TitleRecipe from '../../../elements/Titles/TitleRecipe.svelte';
-	import SettingsPanel from '../SettingsPanel.svelte';
+	import Breadcrumbs from '../../elements/Breadcrumbs.svelte';
+	import TitleRecipe from '../../elements/Titles/TitleRecipe.svelte';
+	import SettingsPanel from './SettingsPanel/SettingsPanel.svelte';
 
 	export let title = false;
 	export let recipeId = false;

@@ -1,7 +1,7 @@
 <script>
 	import GoEye from 'svelte-icons/go/GoEye.svelte';
-	import { addViewToRecipeThunk } from '../../../stores/recipeStore';
 	import { onMount } from 'svelte';
+	import { addViewToRecipeThunk } from '../../../../stores/recipeStore';
 
 	export let views = 0;
 	export let recipeId = 0;

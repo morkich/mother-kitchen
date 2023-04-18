@@ -1,7 +1,7 @@
 <script>
 	import MdBookmarkBorder from 'svelte-icons/md/MdBookmarkBorder.svelte';
 	import MdBookmark from 'svelte-icons/md/MdBookmark.svelte';
-	import { makeFavoritesRecipeThunk } from '../../../stores/recipeStore';
+	import { makeFavoritesRecipeThunk } from '../../../../stores/recipeStore';
 
 	export let isFavorite = false;
 	export let recipeId = 0;

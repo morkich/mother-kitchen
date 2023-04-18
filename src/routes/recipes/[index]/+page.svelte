@@ -1,11 +1,9 @@
 <script>
 	import Meta from '../../../components/Meta.svelte';
-	import RecipeHeader from '../../../components/RecipeElements/SettingsPanel/RecipeHeader/RecipeHeader.svelte';
-	import SettingsPanel from '../../../components/RecipeElements/SettingsPanel/SettingsPanel.svelte';
-	import Breadcrumbs from '../../../components/elements/Breadcrumbs.svelte';
-	import TitleRecipe from '../../../components/elements/Titles/TitleRecipe.svelte';
+	import RecipeHeader from '../../../components/RecipeElements/RecipeHeader/RecipeHeader.svelte';
+	import RecipePreview from '../../../components/RecipeElements/RecipePreview/RecipePreview.svelte';
+	import FootNote from '../../../components/elements/Text/FootNote.svelte';
 	import { initRecipeStoresThunk } from '../../../stores/recipeStore';
-
 	export let data;
 
 	$: recipeData = data.recipeData;
@@ -36,30 +34,15 @@
 <div class="mainWrap">
 	<div class="recipeContent">
 		<RecipeHeader title={recipeData.recipeName} recipeId={recipeData._id} {breadcrumbsArray} />
+		<RecipePreview {recipeData} {toolsData} {ingredientsData} />
 
-		<div class="recipePreview">
-			<div class="recipeImageWrap">
-				<img src={recipeData.image} alt="" class="recipeImageImage" />
-			</div>
-
-			<div class="recipeInfo">
-				<div class="recipeIngredients">
-					<div class="infoTitleWrap">
-						<h3 class="infoTitle">Состав</h3>
-						<div class="portionCount">Количество порций: 4 -+</div>
-					</div>
-					<ul class="inredientList">
-						{#each ingredientsData as ingredientItem, index}
-							<li>{ingredientItem.title}....{ingredientItem.mass}</li>
-						{/each}
-					</ul>
-				</div>
-			</div>
+		<div class="recipeBody">
+			<FootNote content={recipeData.beforeText} columnsCount={1} />
+			Шаги и всякое
 		</div>
-
-		<div class="recipeBody">Шаги и всякое</div>
-
-		<footer class="recipeFooter">Пост описание</footer>
+		<footer class="recipeFooter">
+			<FootNote content={recipeData.afterText} columnsCount={2} />
+		</footer>
 	</div>
 
 	<aside class="aside">Сайдбар</aside>
@@ -71,9 +54,15 @@
 		grid-template-columns: 1fr 280px;
 		grid-gap: 50px;
 	}
+	.recipeBody {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-gap: 30px;
+	}
 	.recipeContent {
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-gap: 25px;
+		width: 100%;
 	}
 </style>

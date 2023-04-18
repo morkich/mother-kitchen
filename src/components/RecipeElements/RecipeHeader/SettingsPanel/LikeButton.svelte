@@ -1,7 +1,7 @@
 <script>
 	import MdFavoriteBorder from 'svelte-icons/md/MdFavoriteBorder.svelte';
 	import MdFavorite from 'svelte-icons/md/MdFavorite.svelte';
-	import { likedRecipeThunk } from '../../../stores/recipeStore';
+	import { likedRecipeThunk } from '../../../../stores/recipeStore';
 
 	export let isLike = false;
 	export let recipeId = 0;
