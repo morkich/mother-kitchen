@@ -2,8 +2,13 @@
 	import Meta from '../../../components/Meta.svelte';
 	import RecipeHeader from '../../../components/RecipeElements/RecipeHeader/RecipeHeader.svelte';
 	import RecipePreview from '../../../components/RecipeElements/RecipePreview/RecipePreview.svelte';
+	import RecipeSteps from '../../../components/RecipeElements/RecipeSteps/RecipeSteps.svelte';
 	import FootNote from '../../../components/elements/Text/FootNote.svelte';
-	import { initRecipeStoresThunk } from '../../../stores/recipeStore';
+	import {
+		initRecipeSecondDataThunk,
+		initRecipeStoresThunk,
+		recipeIngredientsStore
+	} from '../../../stores/recipeStore';
 	export let data;
 
 	$: recipeData = data.recipeData;
@@ -15,6 +20,10 @@
 
 	$: if (recipeData) {
 		initRecipeStoresThunk(recipeData);
+	}
+
+	$: if (ingredientsData && toolsData) {
+		initRecipeSecondDataThunk(ingredientsData, toolsData);
 	}
 
 	const getBreadcrumbsArray = (categoriesData, recipeData) => {
@@ -38,7 +47,7 @@
 
 		<div class="recipeBody">
 			<FootNote content={recipeData.beforeText} columnsCount={1} />
-			Шаги и всякое
+			<RecipeSteps steps={recipeData.steps} />
 		</div>
 		<footer class="recipeFooter">
 			<FootNote content={recipeData.afterText} columnsCount={2} />

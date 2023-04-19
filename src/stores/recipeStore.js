@@ -1,6 +1,9 @@
 import { writable } from 'svelte/store';
 import { recipeAPI } from '../api/api';
 import { userStore } from './userStore';
+
+export const recipeIngredientsStore = writable(false);
+export const recipeToolsStore = writable(false);
 export const recipeLikesStore = writable(0);
 export const recipeViewsStore = writable(0);
 export const recipePortionCountStore = writable(4);
@@ -11,6 +14,11 @@ export const initRecipeStoresThunk = (initData) => {
 	recipeViewsStore.set(initData.views);
 	recipePortionCountStore.set(initData.portionsCount);
 	isLoadingRecipeStore.set(false);
+};
+
+export const initRecipeSecondDataThunk = (ingredientsData, toolsData) => {
+	recipeIngredientsStore.set(ingredientsData);
+	recipeToolsStore.set(toolsData);
 };
 
 export const likedRecipeThunk = async (isLike, recipeId, userId) => {

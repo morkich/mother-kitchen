@@ -5,13 +5,18 @@
 	export let ingredientsData = [];
 
 	$: portionsCount = $recipePortionCountStore;
+
+	const getIngredientsMass = (mass, portionCount, unit) => {
+		const realMass = mass !== 0 ? mass * portionCount : '';
+		return `${realMass} ${unit}`;
+	};
 </script>
 
 <ul class="ingredientList">
 	{#each ingredientsData as ingredientItem, index}
 		<li class="ingredientItem">
 			<span>{capitalizeString(ingredientItem.title)}</span>
-			<span>{+ingredientItem.mass * portionsCount}</span>
+			<span>{getIngredientsMass(+ingredientItem.mass, portionsCount, ingredientItem.unit)}</span>
 		</li>
 	{/each}
 </ul>

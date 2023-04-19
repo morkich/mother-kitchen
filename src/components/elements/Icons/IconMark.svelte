@@ -2,9 +2,10 @@
 	export let icon = false;
 	export let color = '#222';
 	export let mark = 'mark';
+	export let isHorizontal = false;
 </script>
 
-<div class="wrap" style:color>
+<div class="wrap" style:color class:isHorizontal>
 	<div class="iconWrap">
 		<svelte:component this={icon} />
 	</div>
@@ -17,6 +18,9 @@
 		font-size: 12px;
 		align-items: center;
 		gap: 5px;
+	}
+	.isHorizontal {
+		flex-direction: column;
 	}
 	.iconWrap {
 		width: 20px;
