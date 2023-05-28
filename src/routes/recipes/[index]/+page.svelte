@@ -4,11 +4,7 @@
 	import RecipePreview from '../../../components/RecipeElements/RecipePreview/RecipePreview.svelte';
 	import RecipeSteps from '../../../components/RecipeElements/RecipeSteps/RecipeSteps.svelte';
 	import FootNote from '../../../components/elements/Text/FootNote.svelte';
-	import {
-		initRecipeSecondDataThunk,
-		initRecipeStoresThunk,
-		recipeIngredientsStore
-	} from '../../../stores/recipeStore';
+	import { initRecipeSecondDataThunk, initRecipeStoresThunk } from '../../../stores/recipeStore';
 	export let data;
 
 	$: recipeData = data.recipeData;

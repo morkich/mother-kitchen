@@ -1,10 +1,15 @@
 <script>
+	import { authStore } from '../stores/authStore';
+	import { userStore } from '../stores/userStore';
 	import Logo from './elements/Logo.svelte';
 	import MainSearch from './elements/MainSearch.svelte';
 	import UserLogin from './elements/User/UserLogin.svelte';
 	import MainMenu from './Menus/MainMenu.svelte';
 
 	export let data = false;
+
+	$: console.log($authStore, 'AUTH STORE');
+	$: console.log($userStore, 'USER STORE');
 </script>
 
 <header class="mainHeader">

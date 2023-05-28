@@ -6,7 +6,7 @@ const getDataByServer = async (endPoint) => {
 };
 
 const postDataByServer = async (endPoint, data) => {
-	const token = document.cookie.match('(^|;)\\s*token\\s*=\\s*([^;]+)')?.pop() || '';
+	const token = data.token || document.cookie.match('(^|;)\\s*token\\s*=\\s*([^;]+)')?.pop() || '';
 	const url = `http://localhost:3000/${endPoint}`;
 	const response = await fetch(url, {
 		method: 'POST',

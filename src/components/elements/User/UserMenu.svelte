@@ -15,7 +15,7 @@
 			<button class="menuButton"> Настройки </button>
 		</li>
 		<li class="menuItem">
-			<button class="menuButton"> Мои рецепты </button>
+			<a href="/workspace/recipes" class="menuButton">Мои рецепты</a>
 		</li>
 		<li class="menuItem">
 			<button class="menuButton"> Избранное </button>
@@ -57,6 +57,9 @@
 		font-weight: 600;
 		font-size: 15px;
 		transition: 0.2s;
+		color: var(--color-dark-blue);
+		text-decoration: none;
+		box-sizing: border-box;
 	}
 	.menuButton:hover {
 		background-color: var(--color-bcg-grey);

@@ -2,9 +2,7 @@ import { writable } from 'svelte/store';
 import { authApi } from '../api/api';
 import { userStore } from './userStore';
 export const authStore = writable({
-	login: '',
-	password: '',
-	token: ''
+	isAuth: false
 });
 export const isLoadAuthStore = writable(true);
 
